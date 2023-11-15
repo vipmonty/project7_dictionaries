@@ -136,5 +136,42 @@ def main(arg):
 
 
 # ==========================================================PART3:WITH CACHING OUTPUT====================================================================================
+
+    timer_start = perf_counter()
+    try:
+        x = int(arg[1])
+        for r in range(0, x):
+            for c in range(0, r+1):
+                print(weight_on_with_caching(r, c), end=" ")
+                key = (r, c)
+                cache[key] = weight_on_with_caching(r, c)
+            print("")
+    except:
+        print("Please enter row number as integer.")
+        print("usage from command line:<python3> <'pyramid.py'> <row number as integer>")
+
+    timer_end = perf_counter()
+
+    print("Elapsed time: ", timer_end - timer_start, "seconds")
+    print(f"Number of function calls: {counter}")
+    print(f"Number of cache hits: {cache_counter}")
+    print("This is the with_cache section============================================================================")
+    text_counter = counter
+    cache_count = cache_counter
+    try:
+        with open("cachless.txt", "w")as out_file:
+            for r in range(0, int(sys.argv[1])):
+                for c in range(0, r+1):
+                    out_file.write(f"{weight_on_with_caching(r,c)} ")
+                out_file.write("\n")
+            out_file.write(
+                f"Elapsed time: { timer_end - timer_start} seconds\n")
+            out_file.write(f"Number of function calls: {text_counter}\n")
+            out_file.write(f"Number of cache hits: {cache_count}")
+    except:
+        print("Please enter row number as integer.")
+        print("usage from command line:<python3> <'pyramid.py'> <row number as integer>")
+
+
 if __name__ == "__main__":
     main(sys.argv)
