@@ -1,17 +1,17 @@
 class HashMap:
-    def __init__(self, size=100):
-        self.size = size
-        self.map = [None] * self.size
+    def __init__(self, size=7):
+        self.table_size = size
+        self.map = [None] * self.table_size
         self.num_elements = 0
 
     def _hash_function(self, key):
-        return hash(key) % self.size
+        return hash(key) % self.table_size
 
     def _rehash(self):
         # Double the size of the map and rehash all elements
-        self.size *= 2
+        self.table_size *= 2
         old_map = self.map
-        self.map = [None] * self.size
+        self.map = [None] * self.table_size
         self.num_elements = 0
 
         for slot in old_map:
@@ -30,7 +30,7 @@ class HashMap:
         self.map[index].append([key, value])
         self.num_elements += 1
 
-        load_factor = self.num_elements / self.size
+        load_factor = self.num_elements / self.table_size
         if load_factor >= 0.8:
             self._rehash()
 
@@ -69,11 +69,18 @@ class HashMap:
                     key_list.append(pair[0])
         return key_list
 
-    def get_size(self):
+    def size(self):
         return self.num_elements
 
     def set(self, key, value):
         self.put(key, value)
+
+    def clear(self):
+        self.map = [None] * self.table_size
+        self.num_elements = 0
+
+    def capacity(self):
+        return self.table_size
 
 
 hash_table = HashMap()
@@ -83,10 +90,15 @@ hash_table.set('Ember', 8)
 hash_table.set('Rosemary', 24)
 print(hash_table.keys())
 print(f"Example of get(): {hash_table.get('vip')}")
-print(f"Example of hash_table.get_size():{hash_table.get_size()}")
+print(f"Example of hash_table.get_size():{hash_table.size()}")
 print(f"test hash_table.remove('vip'){hash_table.remove('vip')}")
 print(
-    f"Keys after removal: {hash_table.keys()} and size is: {hash_table.get_size()}")
+    f"Keys after removal: {hash_table.keys()} and size is: {hash_table.size()}")
+print(f"Capacity before clear {hash_table.capacity()}")
+print(f"Test the clear method{hash_table.clear()}")
+print(f"present keys after clear() call{hash_table.keys()}")
+print(f"Capacity after clear {hash_table.capacity()}")
+
 
 # class ChainingHashTableItem:
 #     def __init__(self, itemKey, itemValue):
