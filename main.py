@@ -155,11 +155,11 @@ def main(arg):
     print("Elapsed time: ", timer_end - timer_start, "seconds")
     print(f"Number of function calls: {counter}")
     print(f"Number of cache hits: {cache_counter}")
-    print("This is the with_cache section============================================================================")
+    # print("This is the with_cache section============================================================================")
     text_counter = counter
     cache_count = cache_counter
     try:
-        with open("cachless.txt", "w")as out_file:
+        with open("with_caching.txt", "w")as out_file:
             for r in range(0, int(sys.argv[1])):
                 for c in range(0, r+1):
                     out_file.write(f"{weight_on_with_caching(r,c)} ")
