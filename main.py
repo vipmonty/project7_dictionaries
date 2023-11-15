@@ -99,7 +99,6 @@ def weight_on_sides_with_caching(r, c=0):
     global counter
     if r == 0:
         counter += 1
-        # <===================================================================================to add 2 decimal points to output
         return (f"{0.0:.2f}")
     elif r == 1:
         counter += 1
@@ -118,14 +117,17 @@ def main(arg):
     x = int(arg[1])
     for r in range(0, x):
         for c in range(0, r+1):
-            # print(round(float(weight_on_cacheless(r, c)), 2), end=" ")
-            # <===============================================HOW TO MAKE RESULT TWO DECIMAL POINTS USE SYNTAX FROM THE LINE BELOW=====================
-            print(f"{float(weight_on_cacheless(r, c)):.2f}", end=" ")
-
-        print("")
+            if c == r:
+                last_index = f"{float(weight_on_cacheless(r,c)):.2f}"
+            else:
+                dont_print = f"{float(weight_on_cacheless(r, c)):.2f}"
+                key = (r, c)
+                cache[key] = weight_on_with_caching(r, c)
+        # print(f"{float(weight_on_cacheless(r, c)):.2f}", end=" ")#<======================I took away the space in end=" "
+        # print("")
     end_timer = perf_counter()
-    print(f"Elased time: {end_timer - start_timer} seconds")
-    print(f"Number of function calls: {functions - 1}")
+    # print(f"Elased time: {end_timer - start_timer} seconds")
+    # print(f"Number of function calls: {functions - 1}")
 
 
 # ========================================================PART2:WRITE_OUTPUT_TO_CACHELESS.TXT===========================================================================
@@ -134,7 +136,7 @@ def main(arg):
         for r in range(0, int(sys.argv[1])):
             for c in range(0, r+1):
                 out_file.write(
-                    f"{float(weight_on_cacheless(r,c)):.2f} ")
+                    f"{weight_on_cacheless(r,c)}")
             out_file.write("\n")
         out_file.write(f"Elapsed time: { end_timer - start_timer} seconds\n")
         out_file.write(f"Number of function calls: {(functions//2)-1}\n")
@@ -147,17 +149,20 @@ def main(arg):
         x = int(arg[1])
         for r in range(0, x):
             for c in range(0, r+1):
-                print(f"{float(weight_on_with_caching(r, c)):.2f}", end=" ")
-                key = (r, c)
-                cache[key] = weight_on_with_caching(r, c)
-            print("")
+                if c == r:
+                    print(f"{float(weight_on_with_caching(r,c)):.2f}")
+                else:
+                    print(f"{float(weight_on_with_caching(r, c)):.2f}", end=" ")
+                    key = (r, c)
+                    cache[key] = weight_on_with_caching(r, c)
+            # print("")
     except:
         print("Please enter row number as integer.")
         print("usage from command line:<python3> <'pyramid.py'> <row number as integer>")
 
     timer_end = perf_counter()
-
-    print("Elapsed time: ", timer_end - timer_start, "seconds")
+    # print("\n")
+    # print("Elapsed time: ", timer_end - timer_start, "seconds")
     print(f"Number of function calls: {counter}")
     print(f"Number of cache hits: {cache_counter}")
     # print("This is the with_cache section============================================================================")
@@ -167,8 +172,7 @@ def main(arg):
         with open("with_caching.txt", "w")as out_file:
             for r in range(0, int(sys.argv[1])):
                 for c in range(0, r+1):
-                    out_file.write(
-                        f"{float(weight_on_with_caching(r,c)):.2f} ")
+                    out_file.write(f"{weight_on_with_caching(r,c)} ")
                 out_file.write("\n")
             out_file.write(
                 f"Elapsed time: { timer_end - timer_start} seconds\n")
