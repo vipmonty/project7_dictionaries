@@ -61,7 +61,7 @@ def weight_on_cacheless(r, c):
 # print(weight_on_cacheless(3, 1))
 # ================================================================PART3:WEIGHT_ON_WITH_CACHING==================================================================================
 
-cache = {}  # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<USING HashMap ADT to change back just replace with {}
+cache = HashMap()  # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<USING HashMap ADT to change back just replace with {}
 counter = -1
 cache_counter = -1
 
@@ -118,7 +118,10 @@ def main(arg):
     x = int(arg[1])
     for r in range(0, x):
         for c in range(0, r+1):
-            print(weight_on_cacheless(r, c), end=" ")
+            # print(round(float(weight_on_cacheless(r, c)), 2), end=" ")
+            # <===============================================HOW TO MAKE RESULT TWO DECIMAL POINTS USE SYNTAX FROM THE LINE BELOW=====================
+            print(f"{float(weight_on_cacheless(r, c)):.2f}", end=" ")
+
         print("")
     end_timer = perf_counter()
     print(f"Elased time: {end_timer - start_timer} seconds")
@@ -131,7 +134,7 @@ def main(arg):
         for r in range(0, int(sys.argv[1])):
             for c in range(0, r+1):
                 out_file.write(
-                    f"{weight_on_cacheless(r,c)} ")
+                    f"{float(weight_on_cacheless(r,c)):.2f} ")
             out_file.write("\n")
         out_file.write(f"Elapsed time: { end_timer - start_timer} seconds\n")
         out_file.write(f"Number of function calls: {(functions//2)-1}\n")
@@ -144,7 +147,7 @@ def main(arg):
         x = int(arg[1])
         for r in range(0, x):
             for c in range(0, r+1):
-                print(weight_on_with_caching(r, c), end=" ")
+                print(f"{float(weight_on_with_caching(r, c)):.2f}", end=" ")
                 key = (r, c)
                 cache[key] = weight_on_with_caching(r, c)
             print("")
@@ -164,7 +167,8 @@ def main(arg):
         with open("with_caching.txt", "w")as out_file:
             for r in range(0, int(sys.argv[1])):
                 for c in range(0, r+1):
-                    out_file.write(f"{weight_on_with_caching(r,c)} ")
+                    out_file.write(
+                        f"{float(weight_on_with_caching(r,c)):.2f} ")
                 out_file.write("\n")
             out_file.write(
                 f"Elapsed time: { timer_end - timer_start} seconds\n")

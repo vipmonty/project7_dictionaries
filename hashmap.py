@@ -4,6 +4,29 @@ class HashMap:
         self.map = [None] * self.table_size
         self.num_elements = 0
 
+    def __setitem__(self, key, value):
+        self.put(key, value)
+
+    def __getitem__(self, key):
+        return self.get(key)
+
+    def __iter__(self):
+        self._iter_keys = []
+        for slot in self.map:
+            if slot is not None:
+                for pair in slot:
+                    self._iter_keys.append(pair[0])
+        self._iter_index = 0
+        return self
+
+    def __next__(self):
+        if self._iter_index < len(self._iter_keys):
+            key = self._iter_keys[self._iter_index]
+            self._iter_index += 1
+            return key
+        else:
+            raise StopIteration
+
     def _hash_function(self, key):
         return hash(key) % self.table_size
 
