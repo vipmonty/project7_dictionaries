@@ -1,6 +1,7 @@
 import sys
 from time import perf_counter
 from functools import lru_cache
+from hashmap import HashMap
 # ===============================================================PART1:WEIGHT_ON_CACHELESS()=========================================================================================================
 
 functions = 0
@@ -98,6 +99,7 @@ def weight_on_sides_with_caching(r, c=0):
     global counter
     if r == 0:
         counter += 1
+        # <===================================================================================to add 2 decimal points to output
         return (f"{0.0:.2f}")
     elif r == 1:
         counter += 1
@@ -129,7 +131,7 @@ def main(arg):
         for r in range(0, int(sys.argv[1])):
             for c in range(0, r+1):
                 out_file.write(
-                    f"{weight_on_cacheless(r,c)}")
+                    f"{weight_on_cacheless(r,c)} ")
             out_file.write("\n")
         out_file.write(f"Elapsed time: { end_timer - start_timer} seconds\n")
         out_file.write(f"Number of function calls: {(functions//2)-1}\n")

@@ -83,21 +83,21 @@ class HashMap:
         return self.table_size
 
 
-hash_table = HashMap()
-hash_table.set('vip', 24)
-hash_table.set('kylie', 32)
-hash_table.set('Ember', 8)
-hash_table.set('Rosemary', 24)
-print(hash_table.keys())
-print(f"Example of get(): {hash_table.get('vip')}")
-print(f"Example of hash_table.get_size():{hash_table.size()}")
-print(f"test hash_table.remove('vip'){hash_table.remove('vip')}")
-print(
-    f"Keys after removal: {hash_table.keys()} and size is: {hash_table.size()}")
-print(f"Capacity before clear {hash_table.capacity()}")
-print(f"Test the clear method{hash_table.clear()}")
-print(f"present keys after clear() call{hash_table.keys()}")
-print(f"Capacity after clear {hash_table.capacity()}")
+# hash_table = HashMap()
+# hash_table.set('vip', 24)
+# hash_table.set('kylie', 32)
+# hash_table.set('Ember', 8)
+# hash_table.set('Rosemary', 24)
+# print(hash_table.keys())
+# print(f"Example of get(): {hash_table.get('vip')}")
+# print(f"Example of hash_table.get_size():{hash_table.size()}")
+# print(f"test hash_table.remove('vip'){hash_table.remove('vip')}")
+# print(
+#     f"Keys after removal: {hash_table.keys()} and size is: {hash_table.size()}")
+# print(f"Capacity before clear {hash_table.capacity()}")
+# print(f"Test the clear method{hash_table.clear()}")
+# print(f"present keys after clear() call{hash_table.keys()}")
+# print(f"Capacity after clear {hash_table.capacity()}")
 
 
 # class ChainingHashTableItem:
